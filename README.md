@@ -1,9 +1,9 @@
-# Mushroom Classification 🍄
+# Mushroom Classification
 
 A machine learning web app that predicts whether a mushroom is **edible or poisonous** based on its physical characteristics.
 
 ## Live Demo
-🔗 [mushroom-classifier on Railway](#) *(update after deployment)*
+🔗 [mushroom-classifier.up.railway.app](#)
 
 ## About
 Given 12 physical features of a mushroom (cap shape, odor, gill color, etc.), the model classifies it as edible or poisonous. Built with a **Support Vector Classifier (SVC)** trained on the UCI Mushroom dataset.
@@ -36,10 +36,11 @@ Given 12 physical features of a mushroom (cap shape, odor, gill color, etc.), th
 - **Deployment:** Railway
 
 ## Run Locally
-```bash
+open bash and run these commands
+
 git clone https://github.com/Fatima-I/mushroom-classifier
 cd mushroom-classifier
 pip install -r requirements.txt
 python app.py
-```
+
 Then open `http://localhost:5000`
