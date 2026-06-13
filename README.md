@@ -39,8 +39,11 @@ Given 12 physical features of a mushroom (cap shape, odor, gill color, etc.), th
 open bash and run these commands
 
 git clone https://github.com/Fatima-I/mushroom-classifier
+
 cd mushroom-classifier
+
 pip install -r requirements.txt
+
 python app.py
 
 Then open `http://localhost:5000`
