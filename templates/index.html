@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mushroom Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000 0%, #878787 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(to right, #dd6666, #878787);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5ee;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #000000, #878787);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            background-color: #f4f4f4;
+        }
+
+        .error {
+            margin-top: 15px;
+            padding: 10px;
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-seedling"></i> Mushroom Prediction Model</h1>
+            <p>Enter Mushroom Details</p>
+        </div>
+
+        <div class="content">
+            <form id="prediction-form">
+
+                <!-- Cap Shape -->
+                <div class="input-group">
+                    <label>Cap Shape</label>
+                    <select id="cap_shape" required>
+                        <option value="">Select Cap Shape</option>
+                        <option value="b">Bell</option>
+                        <option value="c">Conical</option>
+                        <option value="f">Flat</option>
+                        <option value="k">Knobbed</option>
+                        <option value="s">Sunken</option>
+                        <option value="x">Convex</option>
+                    </select>
+                </div>
+
+                <!-- Cap Surface -->
+                <div class="input-group">
+                    <label>Cap Surface</label>
+                    <select id="cap_surface" required>
+                        <option value="">Select Cap Surface</option>
+                        <option value="f">Fibrous</option>
+                        <option value="g">Grooves</option>
+                        <option value="s">Smooth</option>
+                        <option value="y">Scaly</option>
+                    </select>
+                </div>
+
+                <!-- Cap Color -->
+                <div class="input-group">
+                    <label>Cap Color</label>
+                    <select id="cap_color" required>
+                        <option value="">Select Cap Color</option>
+                        <option value="b">Buff</option>
+                        <option value="c">Cinnamon</option>
+                        <option value="e">Red</option>
+                        <option value="g">Gray</option>
+                        <option value="n">Brown</option>
+                        <option value="p">Pink</option>
+                        <option value="r">Green</option>
+                        <option value="u">Purple</option>
+                        <option value="w">White</option>
+                        <option value="y">Yellow</option>
+                    </select>
+                </div>
+
+                <!-- Bruises -->
+                <div class="input-group">
+                    <label>Bruises</label>
+                    <select id="bruises" required>
+                        <option value="">Select</option>
+                        <option value="t">Yes</option>
+                        <option value="f">No</option>
+                    </select>
+                </div>
+
+                <!-- Odor -->
+                <div class="input-group">
+                    <label>Odor</label>
+                    <select id="odor" required>
+                        <option value="">Select Odor</option>
+                        <option value="a">Almond</option>
+                        <option value="c">Creosote</option>
+                        <option value="f">Foul</option>
+                        <option value="l">Anise</option>
+                        <option value="m">Musty</option>
+                        <option value="n">None</option>
+                        <option value="p">Pungent</option>
+                        <option value="s">Spicy</option>
+                        <option value="y">Fishy</option>
+                    </select>
+                </div>
+
+                <!-- Gill Size -->
+                <div class="input-group">
+                    <label>Gill Size</label>
+                    <select id="gill_size" required>
+                        <option value="">Select Gill Size</option>
+                        <option value="b">Broad</option>
+                        <option value="n">Narrow</option>
+                    </select>
+                </div>
+
+                <!-- Gill Color -->
+                <div class="input-group">
+                    <label>Gill Color</label>
+                    <select id="gill_color" required>
+                        <option value="">Select Gill Color</option>
+                        <option value="b">Buff</option>
+                        <option value="e">Red</option>
+                        <option value="g">Gray</option>
+                        <option value="h">Chocolate</option>
+                        <option value="k">Black</option>
+                        <option value="n">Brown</option>
+                        <option value="o">Orange</option>
+                        <option value="p">Pink</option>
+                        <option value="r">Green</option>
+                        <option value="u">Purple</option>
+                        <option value="w">White</option>
+                        <option value="y">Yellow</option>
+                    </select>
+                </div>
+
+                <!-- Stalk Root -->
+                <div class="input-group">
+                    <label>Stalk Root</label>
+                    <select id="stalk_root" required>
+                        <option value="">Select Stalk Root</option>
+                        <option value="?">Missing</option>
+                        <option value="b">Bulbous</option>
+                        <option value="c">Club</option>
+                        <option value="e">Equal</option>
+                        <option value="r">Rooted</option>
+                    </select>
+                </div>
+
+                <!-- Stalk Surface Below Ring -->
+                <div class="input-group">
+                    <label>Stalk Surface Below Ring</label>
+                    <select id="stalk_surface_below_ring" required>
+                        <option value="">Select Surface</option>
+                        <option value="f">Fibrous</option>
+                        <option value="k">Silky</option>
+                        <option value="s">Smooth</option>
+                        <option value="y">Scaly</option>
+                    </select>
+                </div>
+
+                <!-- Ring Number -->
+                <div class="input-group">
+                    <label>Ring Number</label>
+                    <select id="ring_number" required>
+                        <option value="">Select Ring Number</option>
+                        <option value="n">None</option>
+                        <option value="o">One</option>
+                        <option value="t">Two</option>
+                    </select>
+                </div>
+
+                <!-- Ring Type -->
+                <div class="input-group">
+                    <label>Ring Type</label>
+                    <select id="ring_type" required>
+                        <option value="">Select Ring Type</option>
+                        <option value="e">Evanescent</option>
+                        <option value="f">Flaring</option>
+                        <option value="l">Large</option>
+                        <option value="n">None</option>
+                        <option value="p">Pendant</option>
+                    </select>
+                </div>
+
+                <!-- Spore Print Color -->
+                <div class="input-group">
+                    <label>Spore Print Color</label>
+                    <select id="spore_print_color" required>
+                        <option value="">Select Color</option>
+                        <option value="b">Buff</option>
+                        <option value="h">Chocolate</option>
+                        <option value="k">Black</option>
+                        <option value="n">Brown</option>
+                        <option value="o">Orange</option>
+                        <option value="r">Green</option>
+                        <option value="u">Purple</option>
+                        <option value="w">White</option>
+                        <option value="y">Yellow</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">
+                    Predict
+                </button>
+
+            </form>
+
+            <div class="error" id="error"></div>
+
+            <div class="result" id="result">
+                <h3>Prediction Result:</h3>
+                <div id="prediction-output"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const errorDiv = document.getElementById('error');
+            const resultDiv = document.getElementById('result');
+            const outputDiv = document.getElementById('prediction-output');
+
+            errorDiv.style.display = 'none';
+            resultDiv.style.display = 'none';
+
+            try {
+                const formData = new FormData();
+                formData.append('cap_shape',                document.getElementById('cap_shape').value);
+                formData.append('cap_surface',              document.getElementById('cap_surface').value);
+                formData.append('cap_color',                document.getElementById('cap_color').value);
+                formData.append('bruises',                  document.getElementById('bruises').value);
+                formData.append('odor',                     document.getElementById('odor').value);
+                formData.append('gill_size',                document.getElementById('gill_size').value);
+                formData.append('gill_color',               document.getElementById('gill_color').value);
+                formData.append('stalk_root',               document.getElementById('stalk_root').value);
+                formData.append('stalk_surface_below_ring', document.getElementById('stalk_surface_below_ring').value);
+                formData.append('ring_number',              document.getElementById('ring_number').value);
+                formData.append('ring_type',                document.getElementById('ring_type').value);
+                formData.append('spore_print_color',        document.getElementById('spore_print_color').value);
+
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server Error");
+                }
+
+                const data = await response.json();
+
+                outputDiv.textContent = data.prediction;
+                resultDiv.style.display = 'block';
+
+            } catch (error) {
+                errorDiv.textContent = "Error getting prediction. Please try again.";
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
